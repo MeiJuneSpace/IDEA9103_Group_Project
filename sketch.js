@@ -9,7 +9,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(216, 222, 255);
 }
 
 function windowResize() {
