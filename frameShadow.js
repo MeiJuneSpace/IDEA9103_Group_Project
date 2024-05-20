@@ -1,12 +1,12 @@
-function drawInsideCanvas(){
+function drawInsideCanvas() {
     //draw insidecanvas
-    fill(216, 222, 255);
+    fill(shallowPurple);
     noStroke();
     rect(insideCanvasX, insideCanvasY, insideCanvasWidth, insideCanvasHeight);
     }
 
 function drawFrame(){
-    for(let i = 0; i < 30; i++){
+    for (let i = 0; i < 30; i++) {
         noFill();
         stroke(73 + 3 * i, 38 + i, 1 + i);
         frameX = insideCanvasX - i/2;
@@ -17,9 +17,9 @@ function drawFrame(){
     }
 }
 
-function drawShadow(){
+function drawShadow() {
     //draw base dark shallow
-    fill(0,50);
+    fill(0, 50);
     noStroke();
     rect(0, 0, windowWidth, windowHeight);
 }

@@ -1,3 +1,11 @@
+// Define colours used in the current artwork
+let limeGreen = color(130, 255, 213);
+let roseRed = color(190, 34, 74);
+let milkYellow = color(225, 226, 208);
+let linePurple = color(128, 132, 255);
+let shallowPurple = color(216, 222, 255);
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
