@@ -11,7 +11,7 @@ function setup() {
 function draw() {
 
   // This is background color
-  background(216, 222, 255);
+  background(255);
   //hi
 }
 
