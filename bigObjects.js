@@ -27,6 +27,12 @@ class SmallRect {
     
 }
 
+//frame
+class frame{
+    
+}
+
+
 // Shadow
 class Shadow {
 
