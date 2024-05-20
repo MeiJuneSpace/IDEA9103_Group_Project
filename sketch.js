@@ -1,10 +1,8 @@
-// Define colours used in the current artwork
-let limeGreen = color(130, 255, 213);
-let roseRed = color(190, 34, 74);
-let milkYellow = color(225, 226, 208);
-let linePurple = color(128, 132, 255);
-let shallowPurple = color(216, 222, 255);
+// Define colours
+let limeGreen, roseRed, milkYellow, linePurple, shallowPurple;
 
+// Create dimension for inside canvas
+let insideCanvas;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -14,15 +12,16 @@ function setup() {
   colorMode(RGB);
   angleMode(DEGREES);
 
-  //set insideCanvas elements
-  insideCanvasX = windowWidth/10;
-  insideCanvasY = windowHeight/5;
-  insideCanvasWidth = 4 * windowWidth / 5;
-  insideCanvasHeight = 3 * windowHeight / 5;
+  // Preset colours
+  limeGreen = color(130, 255, 213);
+  roseRed = color(190, 34, 74);
+  milkYellow = color(225, 226, 208);
+  linePurple = color(128, 132, 255);
+  shallowPurple = color(216, 222, 255);
 
+  // Initialise insideCanvas
+  insideCanvas = new InsideCanvas();
 }
-
-
 
 function draw() {
   // This is background color
@@ -36,6 +35,36 @@ function draw() {
   drawShadow();
 }
 
-function windowResize() {
+function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+
+  // Update insideCanvas dimensions
+  insideCanvas.updateDimensions();
+}
+
+// Draw inside canvas based on the insideCanvas class
+function drawInsideCanvas() {
+    // Draw inside canvas
+    fill(shallowPurple);
+    noStroke();
+    rect(insideCanvas.x, insideCanvas.y, insideCanvas.width, insideCanvas.height);
+}
+
+function drawFrame() {
+for (let i = 0; i < 30; i++) {
+    noFill();
+    stroke(73 + 3 * i, 38 + i, 1 + i);
+    let frameX = insideCanvas.x - i / 2;
+    let frameY = insideCanvas.y - i / 2;
+    let frameWidth = insideCanvas.width + i;
+    let frameHeight = insideCanvas.height + i;
+    rect(frameX, frameY, frameWidth, frameHeight);
+}
+}
+
+function drawShadow() {
+    // Draw base dark shadow
+    fill(0, 50);
+    noStroke();
+    rect(0, 0, windowWidth, windowHeight);
 }
