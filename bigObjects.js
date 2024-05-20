@@ -8,7 +8,7 @@ and then you can move on.
 */
 
 // This is for background yellow lines
-class YellowLines {
+class PurpleLines {
 
 }
 
@@ -24,5 +24,15 @@ class CircleInRect {
 
 // This is for small rectangles on the yellow lines
 class SmallRect {
+    
+}
+
+// Shadow
+class Shadow {
+
+}
+
+// Background Purple Rect
+class PurpleRect {
     
 }
