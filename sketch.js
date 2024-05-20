@@ -14,19 +14,16 @@ function setup() {
 
 }
 
-function drawInsideCanvas(){
-//draw insidecanvas
-fill(216, 222, 255);
-noStroke()
-rect(insideCanvasX, insideCanvasY, insideCanvasWidth, insideCanvasHeight);
-}
+
 
 function draw() {
   // This is background color
   background(255);
   drawInsideCanvas();
   drawFrame();
-  
+
+  //This is shallow of the whole canvas. It must be on the top of the canvas
+  drawShallow();
 }
 
 function windowResize() {

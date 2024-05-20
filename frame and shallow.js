@@ -1,7 +1,11 @@
-
+function drawInsideCanvas(){
+    //draw insidecanvas
+    fill(216, 222, 255);
+    noStroke()
+    rect(insideCanvasX, insideCanvasY, insideCanvasWidth, insideCanvasHeight);
+    }
 
 function drawFrame(){
-    //set base frame value
     for(let i = 0; i < 30; i++){
         noFill();
         stroke(73 + 3 * i, 38 + i, 1 + i);
@@ -11,4 +15,13 @@ function drawFrame(){
         frameHeight = insideCanvasHeight + i;
         rect(frameX, frameY, frameWidth, frameHeight);
     }
+}
+
+function drawShallow(){
+    //draw base dark shallow
+    fill(0,50);
+    noStroke()
+    rect(0, 0, windowWidth, windowHeight);
+    
+
 }
