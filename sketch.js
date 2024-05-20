@@ -6,7 +6,7 @@ function setup() {
   colorMode(RGB);
   angleMode(DEGREES);
 
-  //set insideCamvas elements
+  //set insideCanvas elements
   insideCanvasX = windowWidth/10;
   insideCanvasY = windowHeight/5;
   insideCanvasWidth = 4 * windowWidth / 5;
@@ -19,11 +19,13 @@ function setup() {
 function draw() {
   // This is background color
   background(255);
+  // Draw canvas for the drawing elements
   drawInsideCanvas();
   drawFrame();
 
-  //This is shallow of the whole canvas. It must be on the top of the canvas
-  drawShallow();
+  // This is the shadow of the whole canvas
+  // This must be on the top of the canvas
+  drawShadow();
 }
 
 function windowResize() {

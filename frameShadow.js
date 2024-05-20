@@ -1,7 +1,7 @@
 function drawInsideCanvas(){
     //draw insidecanvas
     fill(216, 222, 255);
-    noStroke()
+    noStroke();
     rect(insideCanvasX, insideCanvasY, insideCanvasWidth, insideCanvasHeight);
     }
 
@@ -17,11 +17,9 @@ function drawFrame(){
     }
 }
 
-function drawShallow(){
+function drawShadow(){
     //draw base dark shallow
     fill(0,50);
-    noStroke()
+    noStroke();
     rect(0, 0, windowWidth, windowHeight);
-    
-
 }
