@@ -147,7 +147,7 @@ function drawLightshallow(){
     //Use loop to draw shape
     for (let col = 0; col < 5; col++) {
       for (let row = 0; row < 3; row++) {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 20; i++) {
           let dx = col * shallowDistanceX;
           let dy = 1 * row * shallowDistanceY + col * shallowVerticalDistance;
           //calculate shallow shape value
