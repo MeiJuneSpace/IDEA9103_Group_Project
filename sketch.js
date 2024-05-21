@@ -63,7 +63,7 @@ for (let i = 0; i < 30; i++) {
     let frameWidth = insideCanvas.width + i;
     let frameHeight = insideCanvas.height + i;
     rect(frameX, frameY, frameWidth, frameHeight);
-}
+  }
 }
 
 function drawPurpleLines(){
