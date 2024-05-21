@@ -72,11 +72,11 @@ function drawPurpleLines(){
 
     // Horizontal lines (from top to bottom)
     // 1
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 3 * 2, insideCanvas.height / 20);
+    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
     // 2
-    rect(insideCanvas.x + insideCanvas.width / 3 * 2, insideCanvas.y + insideCanvas.height / 20 * 1.5, insideCanvas.width / 3, insideCanvas.height / 20);
+    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 1.5, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
     // 3
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 4, insideCanvas.width / 3 * 2, insideCanvas.height / 20);
+    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 4, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
     // 4
     rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20 * 11.5, insideCanvas.width / 5 * 2, insideCanvas.height / 20);
     // 5
@@ -86,16 +86,39 @@ function drawPurpleLines(){
     // 7
     rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20 * 14, insideCanvas.width / 5 * 2, insideCanvas.height / 20);
     // 8
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y + insideCanvas.height / 20 * 15, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
+    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y + insideCanvas.height / 4 * 3, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
     // 9
     rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 15.5, insideCanvas.width / 5, insideCanvas.height / 20);
     // 10
     rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 17, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
     // 11
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 10 * 9, insideCanvas.width / 3 * 2, insideCanvas.height / 20);
+    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 10 * 9, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
 
     // Vertical lines (from left to right)
-    
+    // 1
+    rect(insideCanvas.x + insideCanvas.width / 25 * 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
+    // 2
+    rect(insideCanvas.x + insideCanvas.width / 25 * 4, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
+    // 3
+    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
+    // 4
+    rect(insideCanvas.x + insideCanvas.width / 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height / 4);
+    // 5
+    rect(insideCanvas.x + insideCanvas.width / 25 * 13, insideCanvas.y + insideCanvas.height / 4 * 3, insideCanvas.width / 50, insideCanvas.height / 4);
+    // 6
+    rect(insideCanvas.x + insideCanvas.width / 25 * 14, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 50, insideCanvas.height / 12 * 7.5);
+    // 7
+    rect(insideCanvas.x + insideCanvas.width / 25 * 15.5, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 50, insideCanvas.height / 12 * 7.5);
+    // 8
+    rect(insideCanvas.x + insideCanvas.width / 25 * 17, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
+    // 9
+    rect(insideCanvas.x + insideCanvas.width / 25 * 18, insideCanvas.y + insideCanvas.height / 20 * 17, insideCanvas.width / 50, insideCanvas.height / 20 * 3);
+    // 10
+    rect(insideCanvas.x + insideCanvas.width / 25 * 19, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 50, insideCanvas.height / 10 * 8);
+    // 11
+    rect(insideCanvas.x + insideCanvas.width / 25 * 21, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 50, insideCanvas.height / 10 * 9);
+    // 12
+    rect(insideCanvas.x + insideCanvas.width / 25 * 22.5, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
 }
 
 function drawLightshallow(){
