@@ -62,6 +62,10 @@ for (let i = 0; i < 30; i++) {
 }
 }
 
+function drawLightshallow(){
+  
+}
+
 function drawShadow() {
     // Draw base dark shadow
     fill(0, 50);
