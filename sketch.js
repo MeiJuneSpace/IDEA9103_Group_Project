@@ -159,6 +159,7 @@ function drawLightshallow(){
           let y3 = baseUpY3 + i + dy;
           let x4 = baseUpX4 - i + dx;
           let y4 = baseUpY4 - 2 * i + dy;
+          //draw shape( two triangles)
           triangle(x1, y1, x2, y2, x3, y3);
           triangle(x4, y4, x2, y2, x3, y3);
         }
