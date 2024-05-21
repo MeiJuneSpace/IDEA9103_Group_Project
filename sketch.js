@@ -36,7 +36,8 @@ function draw() {
 
   // This is the shadow of the whole canvas
   // This must be on the top of the canvas
-  drawShadow();
+  drawShallow();
+  drawLightshallow();
 }
 
 function windowResized() {
@@ -121,14 +122,55 @@ function drawPurpleLines(){
     rect(insideCanvas.x + insideCanvas.width / 25 * 22.5, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
 }
 
+//This is light part of shallow
 function drawLightshallow(){
+    fill(255, 10);
+    noStroke;
+    //Create base part of shallow triangles
+    //Base elements of shallow
+    let baseUpX1 = windowWidth / 5;
+    let baseUpY1 = windowHeight / 7;
+    let baseUpX2 = windowWidth / 5;
+    let baseUpY2 = 3 * windowHeight / 7;
+    let baseUpX3 = 9 * windowWidth / 25;
+    let baseUpY3 = 2 * windowHeight / 7;
+    let baseUpX4 = 9 * windowWidth / 25;
+    let baseUpY4 = 4 * windowHeight / 7 - 2;
+    //Empty between shallow shapes
+    let shallowEmptyX = windowWidth / 40;
+    let shallowEmptyY = windowHeight / 25;
+    //calculate the distance between two shapes
+    let shallowDistanceX = shallowEmptyX + 4 * windowWidth / 25;
+    let shallowDistanceY = shallowEmptyY + 2 * windowHeight / 7;
+    //claculate the distance between vertical column
+    let shallowVerticalDistance = windowHeight / 7 + windowHeight / 35;
+    //Use loop to draw shape
+    for (let col = 0; col < 5; col++) {
+      for (let row = 0; row < 3; row++) {
+        for (let i = 0; i < 30; i++) {
+          let dx = col * shallowDistanceX;
+          let dy = 1 * row * shallowDistanceY + col * shallowVerticalDistance;
+
+          let x1 = baseUpX1 + i + dx;
+          let y1 = baseUpY1 + 2 * i + dy;
+          let x2 = baseUpX2 + i + dx;
+          let y2 = baseUpY2 - i + dy;
+          let x3 = baseUpX3 - i + dx;
+          let y3 = baseUpY3 + i + dy;
+          let x4 = baseUpX4 - i + dx;
+          let y4 = baseUpY4 - 2 * i + dy;
+          triangle(x1, y1, x2, y2, x3, y3);
+          triangle(x4, y4, x2, y2, x3, y3);
+        }
+      }
+  }
   
 }
 
-function drawShadow() {
+//This is shallow base
+function drawShallow() {
     // Draw base dark shadow
-    fill(0, 50);
+    fill(0, 70);
     noStroke();
     rect(0, 0, windowWidth, windowHeight);
 }
-
