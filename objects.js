@@ -20,25 +20,3 @@ class InsideCanvas {
         this.height = 3 * windowHeight / 5;
     }
 }
-
-// This is for basic rectangles
-class Rectangle {
-    constructor(x, y, w, h, color) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.color = color;
-    }
-
-    display() {
-        fill(this.color);
-        noStroke();
-        rect(this.x, this.y, this.w, this.h);
-    }
-}
-
-// This is for interactive elements inside the big rectangles
-class CircleInRect {
-
-}

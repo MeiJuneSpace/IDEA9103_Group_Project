@@ -4,6 +4,10 @@ let limeGreen, roseRed, milkYellow, linePurple, shallowPurple;
 // Create dimension for inside canvas
 let insideCanvas;
 
+// Array to store small rectangles
+let smallRectangles = [];
+let numOfSmallRects = 60;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -21,6 +25,9 @@ function setup() {
 
   // Initialise insideCanvas
   insideCanvas = new InsideCanvas();
+
+  // Generate small rectangles
+  generateSmallRectangles();
 }
 
 function draw() {
@@ -34,10 +41,14 @@ function draw() {
   // This must be at the bottom of the canvas
   drawPurpleLines();
 
+  // Draw small rectangles
+  drawSmallRectangles();
+
   // This is the shadow of the whole canvas
   // This must be on the top of the canvas
   drawShadow();
   drawLightShadow();
+
 }
 
 function windowResized() {
@@ -45,6 +56,9 @@ function windowResized() {
 
   // Update insideCanvas dimensions
   insideCanvas.updateDimensions();
+
+  // Regenerate small rectangles
+  generateSmallRectangles();
 }
 
 // Draw inside canvas based on the insideCanvas class
@@ -165,7 +179,6 @@ function drawLightShadow(){
         }
       }
   }
-  
 }
 
 //This is shadow base
@@ -174,4 +187,24 @@ function drawShadow() {
     fill(0, 70);
     noStroke();
     rect(0, 0, windowWidth, windowHeight);
+}
+
+function generateSmallRectangles() {
+  let colors = [limeGreen, roseRed, milkYellow];
+  smallRectangles = [];
+  for (let i = 0; i < numOfSmallRects; i++) {
+      let color = random(colors);
+      let w = random(insideCanvas.width / 20);
+      let h = random(insideCanvas.height / 20);
+      let x = insideCanvas.x + random(insideCanvas.width - w);  // This ensures small rects are inside the frame
+      let y = insideCanvas.y + random(insideCanvas.height - h); // This ensures small rects are inside the frame
+      smallRectangles.push({ color, x, y, w, h });
+  }
+}
+
+function drawSmallRectangles() {
+  for (let smallRect of smallRectangles) {
+      fill(smallRect.color);
+      rect(smallRect.x, smallRect.y, smallRect.w, smallRect.h);
+  }
 }
