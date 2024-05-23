@@ -36,8 +36,8 @@ function draw() {
 
   // This is the shadow of the whole canvas
   // This must be on the top of the canvas
-  drawShallow();
-  drawLightshallow();
+  drawShadow();
+  drawLightShadow();
 }
 
 function windowResized() {
@@ -123,7 +123,7 @@ function drawPurpleLines(){
 }
 
 //This is light part of shallow
-function drawLightshallow(){
+function drawLightShadow(){
     fill(255, 10);
     noStroke;
     //Create base part of shallow triangles
@@ -168,8 +168,8 @@ function drawLightshallow(){
   
 }
 
-//This is shallow base
-function drawShallow() {
+//This is shadow base
+function drawShadow() {
     // Draw base dark shadow
     fill(0, 70);
     noStroke();
