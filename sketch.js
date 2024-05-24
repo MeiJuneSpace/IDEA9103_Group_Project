@@ -90,59 +90,45 @@ for (let i = 0; i < 30; i++) {
   }
 }
 
-function drawPurpleLines(){
-    fill(linePurple);
-    noStroke();
+let purpleLinesDataArray = [
+  // Horizontal lines
+  { x: 0, y: 1 / 20, w: 7 / 10, h: 1 / 20 },
+  { x: 7 / 10, y: 1.5 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 0, y: 1 / 4, w: 7 / 10, h: 1 / 20 },
+  { x: 0, y: 11.5 / 20, w: 2 / 5, h: 1 / 20 },
+  { x: 7 / 10, y: 12 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 2 / 5, y: 13 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 0, y: 14 / 20, w: 2 / 5, h: 1 / 20 },
+  { x: 2 / 5, y: 3 / 4, w: 3 / 10, h: 1 / 20 },
+  { x: 7 / 10, y: 15.5 / 20, w: 1 / 5, h: 1 / 20 },
+  { x: 7 / 10, y: 17 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 0, y: 9 / 10, w: 7 / 10, h: 1 / 20 },
 
-    // Horizontal lines (from top to bottom)
-    // 1
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
-    // 2
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 1.5, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 3
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 4, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
-    // 4
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20 * 11.5, insideCanvas.width / 5 * 2, insideCanvas.height / 20);
-    // 5
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 12, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 6
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y + insideCanvas.height / 20 * 13, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 7
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20 * 14, insideCanvas.width / 5 * 2, insideCanvas.height / 20);
-    // 8
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y + insideCanvas.height / 4 * 3, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 9
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 15.5, insideCanvas.width / 5, insideCanvas.height / 20);
-    // 10
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 17, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 11
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 10 * 9, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
+  // Vertical lines
+  { x: 2 / 25, y: 0, w: 1 / 50, h: 1 },
+  { x: 4 / 25, y: 0, w: 1 / 50, h: 1 },
+  { x: 2 / 5, y: 0, w: 1 / 50, h: 1 },
+  { x: 1 / 2, y: 0, w: 1 / 50, h: 1 / 4 },
+  { x: 13 / 25, y: 3 / 4, w: 1 / 50, h: 1 / 4 },
+  { x: 14 / 25, y: 1 / 20, w: 1 / 50, h: 7.5 / 12 },
+  { x: 15.5 / 25, y: 1 / 20, w: 1 / 50, h: 7.5 / 12 },
+  { x: 17 / 25, y: 0, w: 1 / 50, h: 1 },
+  { x: 18 / 25, y: 17 / 20, w: 1 / 50, h: 3 / 20 },
+  { x: 19 / 25, y: 1 / 10, w: 1 / 50, h: 8 / 10 },
+  { x: 21 / 25, y: 1 / 10, w: 1 / 50, h: 9 / 10 },
+  { x: 22.5 / 25, y: 0, w: 1 / 50, h: 1 }
+];
 
-    // Vertical lines (from left to right)
-    // 1
-    rect(insideCanvas.x + insideCanvas.width / 25 * 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 2
-    rect(insideCanvas.x + insideCanvas.width / 25 * 4, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 3
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 4
-    rect(insideCanvas.x + insideCanvas.width / 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height / 4);
-    // 5
-    rect(insideCanvas.x + insideCanvas.width / 25 * 13, insideCanvas.y + insideCanvas.height / 4 * 3, insideCanvas.width / 50, insideCanvas.height / 4);
-    // 6
-    rect(insideCanvas.x + insideCanvas.width / 25 * 14, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 50, insideCanvas.height / 12 * 7.5);
-    // 7
-    rect(insideCanvas.x + insideCanvas.width / 25 * 15.5, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 50, insideCanvas.height / 12 * 7.5);
-    // 8
-    rect(insideCanvas.x + insideCanvas.width / 25 * 17, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 9
-    rect(insideCanvas.x + insideCanvas.width / 25 * 18, insideCanvas.y + insideCanvas.height / 20 * 17, insideCanvas.width / 50, insideCanvas.height / 20 * 3);
-    // 10
-    rect(insideCanvas.x + insideCanvas.width / 25 * 19, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 50, insideCanvas.height / 10 * 8);
-    // 11
-    rect(insideCanvas.x + insideCanvas.width / 25 * 21, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 50, insideCanvas.height / 10 * 9);
-    // 12
-    rect(insideCanvas.x + insideCanvas.width / 25 * 22.5, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
+function drawPurpleLines() {
+  fill(linePurple);
+  noStroke();
+
+  for (let line of purpleLinesDataArray) {
+      rect(insideCanvas.x + line.x * insideCanvas.width, 
+           insideCanvas.y + line.y * insideCanvas.height, 
+           line.w * insideCanvas.width, 
+           line.h * insideCanvas.height);
+  }
 }
 
 //This is light part of shallow
