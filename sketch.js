@@ -8,6 +8,9 @@ let insideCanvas;
 let smallRectangles = [];
 let numOfSmallRects = 60;
 
+// Array to store purple lines
+let purpleLinesArray = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -28,6 +31,9 @@ function setup() {
 
   // Generate small rectangles
   generateSmallRectangles();
+
+  // Generate purple lines
+  generatePurpleLines();
 }
 
 function draw() {
@@ -68,6 +74,9 @@ function windowResized() {
 
   // Regenerate small rectangles
   generateSmallRectangles();
+
+  // Regenerate purple lines
+  generatePurpleLines();
 }
 
 // Draw inside canvas based on the insideCanvas class
@@ -119,16 +128,14 @@ let purpleLinesDataArray = [
   { x: 22.5 / 25, y: 0, w: 1 / 50, h: 1 }
 ];
 
-function drawPurpleLines() {
-  fill(linePurple);
-  noStroke();
+function generatePurpleLines() {
+  purpleLinesArray = purpleLinesDataArray.map(data => new PurpleLine(data.x, data.y, data.w, data.h));
+  purpleLinesArray.forEach(line => line.updateSize(insideCanvas.width, insideCanvas.height));
+}
 
-  for (let line of purpleLinesDataArray) {
-      rect(insideCanvas.x + line.x * insideCanvas.width, 
-           insideCanvas.y + line.y * insideCanvas.height, 
-           line.w * insideCanvas.width, 
-           line.h * insideCanvas.height);
-  }
+function drawPurpleLines() {
+  noStroke();
+  purpleLinesArray.forEach(line => line.display());
 }
 
 //This is light part of shallow
@@ -183,6 +190,7 @@ function drawShadow() {
     noStroke();
     rect(0, 0, windowWidth, windowHeight);
 }
+
 
 function generateSmallRectangles() {
   let colors = [limeGreen, roseRed, milkYellow];
