@@ -20,3 +20,7 @@ class InsideCanvas {
         this.height = 3 * windowHeight / 5;
     }
 }
+// Exact ratio of the rect
+// Height : Width e.g., 16:9
+// Then you can have a smallest dimension
+// Then responsive
