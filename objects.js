@@ -8,18 +8,33 @@ and then you can move on.
 */
 
 // Define a class to organise dimension variables
+// Define a class to organise dimension variables
 class InsideCanvas {
     constructor() {
         this.updateDimensions();
     }
 
     updateDimensions() {
-        this.x = windowWidth / 10;
-        this.y = windowHeight / 5;
-        this.width = 4 * windowWidth / 5;
-        this.height = 3 * windowHeight / 5;
+        // Set the ratio
+        this.ratio = 5 / 2;
+
+        // Calculate the width and height based on the window size while maintaining the ratio
+        if (windowWidth / windowHeight >= this.ratio) {
+            // Window is wider than the ratio, height is the limiting factor
+            this.height = 3 * windowHeight / 5;
+            this.width = this.height * this.ratio;
+        } else {
+            // Window is taller than the ratio, width is the limiting factor
+            this.width = 4 * windowWidth / 5;
+            this.height = this.width / this.ratio;
+        }
+
+        // Center the insideCanvas
+        this.x = (windowWidth - this.width) / 2;
+        this.y = (windowHeight - this.height) / 2;
     }
 }
+
 // Exact ratio of the rect
 // Height : Width e.g., 16:9
 // Then you can have a smallest dimension
