@@ -8,7 +8,7 @@ and then you can move on.
 */
 
 // Define a class to organise dimension variables
-// Define a class to organise dimension variables
+
 class InsideCanvas {
     constructor() {
         this.updateDimensions();
@@ -34,8 +34,3 @@ class InsideCanvas {
         this.y = (windowHeight - this.height) / 2;
     }
 }
-
-// Exact ratio of the rect
-// Height : Width e.g., 16:9
-// Then you can have a smallest dimension
-// Then responsive
