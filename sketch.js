@@ -8,6 +8,15 @@ let insideCanvas;
 let smallRectangles = [];
 let numOfSmallRects = 60;
 
+// Array to store purple lines
+let purpleLinesArray = [];
+
+// Array to generate featured rectangles
+let featuredRectArray = [];
+
+// Array to generate centred circles in rectangles
+let centredCircleArray = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -26,8 +35,16 @@ function setup() {
   // Initialise insideCanvas
   insideCanvas = new InsideCanvas();
 
+  // Generate purple lines
+  generatePurpleLines();
+
   // Generate small rectangles
   generateSmallRectangles();
+
+  // Create and add featured rectangles to the array
+  generateFeaturedRectangles();
+
+  generateCentredCircle();
 }
 
 function draw() {
@@ -44,20 +61,16 @@ function draw() {
   // Draw small rectangles
   drawSmallRectangles();
 
-  // Draw big rectangles in fixed position
-  drawLinePurpleRectangles(); // Line Purple
-  drawBigLimeRectangles();  // Lime green
-  drawBigRoseRectangles();  // Rose Red
-  drawMilkYellowRectangles(); // Milk yellow
+  // Display and update each featured rectangle
+  drawFeaturedRectangles();
 
-  // Draw centre circles of each rectangles
-  drawCenteredCircles();
+  // Draw circles in the middle of specific rects
+  drawCentredCircle();
 
   // This is the shadow of the whole canvas
   // This must be on the top of the canvas
   drawShadow();
   drawLightShadow();
-
 }
 
 function windowResized() {
@@ -65,6 +78,9 @@ function windowResized() {
 
   // Update insideCanvas dimensions
   insideCanvas.updateDimensions();
+
+  // Regenerate purple lines
+  generatePurpleLines();
 
   // Regenerate small rectangles
   generateSmallRectangles();
@@ -90,59 +106,43 @@ for (let i = 0; i < 30; i++) {
   }
 }
 
-function drawPurpleLines(){
-    fill(linePurple);
-    noStroke();
+let purpleLinesDataArray = [
+  // Horizontal lines
+  { x: 0, y: 1 / 20, w: 7 / 10, h: 1 / 20 },
+  { x: 7 / 10, y: 1.5 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 0, y: 1 / 4, w: 7 / 10, h: 1 / 20 },
+  { x: 0, y: 11.5 / 20, w: 2 / 5, h: 1 / 20 },
+  { x: 7 / 10, y: 12 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 2 / 5, y: 13 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 0, y: 14 / 20, w: 2 / 5, h: 1 / 20 },
+  { x: 2 / 5, y: 3 / 4, w: 3 / 10, h: 1 / 20 },
+  { x: 7 / 10, y: 15.5 / 20, w: 1 / 5, h: 1 / 20 },
+  { x: 7 / 10, y: 17 / 20, w: 3 / 10, h: 1 / 20 },
+  { x: 0, y: 9 / 10, w: 7 / 10, h: 1 / 20 },
 
-    // Horizontal lines (from top to bottom)
-    // 1
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
-    // 2
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 1.5, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 3
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 4, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
-    // 4
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20 * 11.5, insideCanvas.width / 5 * 2, insideCanvas.height / 20);
-    // 5
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 12, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 6
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y + insideCanvas.height / 20 * 13, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 7
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 20 * 14, insideCanvas.width / 5 * 2, insideCanvas.height / 20);
-    // 8
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y + insideCanvas.height / 4 * 3, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 9
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 15.5, insideCanvas.width / 5, insideCanvas.height / 20);
-    // 10
-    rect(insideCanvas.x + insideCanvas.width / 10 * 7, insideCanvas.y + insideCanvas.height / 20 * 17, insideCanvas.width / 10 * 3, insideCanvas.height / 20);
-    // 11
-    rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 10 * 9, insideCanvas.width / 10 * 7, insideCanvas.height / 20);
+  // Vertical lines
+  { x: 2 / 25, y: 0, w: 1 / 50, h: 1 },
+  { x: 4 / 25, y: 0, w: 1 / 50, h: 1 },
+  { x: 2 / 5, y: 0, w: 1 / 50, h: 1 },
+  { x: 1 / 2, y: 0, w: 1 / 50, h: 1 / 4 },
+  { x: 13 / 25, y: 3 / 4, w: 1 / 50, h: 1 / 4 },
+  { x: 14 / 25, y: 1 / 20, w: 1 / 50, h: 7.5 / 12 },
+  { x: 15.5 / 25, y: 1 / 20, w: 1 / 50, h: 7.5 / 12 },
+  { x: 17 / 25, y: 0, w: 1 / 50, h: 1 },
+  { x: 18 / 25, y: 17 / 20, w: 1 / 50, h: 3 / 20 },
+  { x: 19 / 25, y: 1 / 10, w: 1 / 50, h: 8 / 10 },
+  { x: 21 / 25, y: 1 / 10, w: 1 / 50, h: 9 / 10 },
+  { x: 22.5 / 25, y: 0, w: 1 / 50, h: 1 }
+];
 
-    // Vertical lines (from left to right)
-    // 1
-    rect(insideCanvas.x + insideCanvas.width / 25 * 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 2
-    rect(insideCanvas.x + insideCanvas.width / 25 * 4, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 3
-    rect(insideCanvas.x + insideCanvas.width / 5 * 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 4
-    rect(insideCanvas.x + insideCanvas.width / 2, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height / 4);
-    // 5
-    rect(insideCanvas.x + insideCanvas.width / 25 * 13, insideCanvas.y + insideCanvas.height / 4 * 3, insideCanvas.width / 50, insideCanvas.height / 4);
-    // 6
-    rect(insideCanvas.x + insideCanvas.width / 25 * 14, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 50, insideCanvas.height / 12 * 7.5);
-    // 7
-    rect(insideCanvas.x + insideCanvas.width / 25 * 15.5, insideCanvas.y + insideCanvas.height / 20, insideCanvas.width / 50, insideCanvas.height / 12 * 7.5);
-    // 8
-    rect(insideCanvas.x + insideCanvas.width / 25 * 17, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
-    // 9
-    rect(insideCanvas.x + insideCanvas.width / 25 * 18, insideCanvas.y + insideCanvas.height / 20 * 17, insideCanvas.width / 50, insideCanvas.height / 20 * 3);
-    // 10
-    rect(insideCanvas.x + insideCanvas.width / 25 * 19, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 50, insideCanvas.height / 10 * 8);
-    // 11
-    rect(insideCanvas.x + insideCanvas.width / 25 * 21, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 50, insideCanvas.height / 10 * 9);
-    // 12
-    rect(insideCanvas.x + insideCanvas.width / 25 * 22.5, insideCanvas.y, insideCanvas.width / 50, insideCanvas.height);
+function generatePurpleLines() {
+  purpleLinesArray = purpleLinesDataArray.map(data => new PurpleLine(data.x, data.y, data.w, data.h));
+  purpleLinesArray.forEach(line => line.updateSize(insideCanvas.width, insideCanvas.height));
+}
+
+function drawPurpleLines() {
+  noStroke();
+  purpleLinesArray.forEach(line => line.display());
 }
 
 //This is light part of shallow
@@ -198,6 +198,7 @@ function drawShadow() {
     rect(0, 0, windowWidth, windowHeight);
 }
 
+
 function generateSmallRectangles() {
   let colors = [limeGreen, roseRed, milkYellow];
   smallRectangles = [];
@@ -218,108 +219,98 @@ function drawSmallRectangles() {
   }
 }
 
-// Big rectangles in lime green
-function drawBigLimeRectangles() {
-  fill(limeGreen);
-  noStroke();
-
-  // 1
-  rect(insideCanvas.x, insideCanvas.y + insideCanvas.height / 3, insideCanvas.width / 12.5, insideCanvas.height / 6);
-  // 2
-  rect(insideCanvas.x + insideCanvas.width / 11 * 3, insideCanvas.y + insideCanvas.height / 8 * 3, insideCanvas.width / 15, insideCanvas.height / 6);
-  // 3
-  rect(insideCanvas.x + insideCanvas.width / 14 * 6.44, insideCanvas.y + insideCanvas.height / 6.7, insideCanvas.width / 25, insideCanvas.height / 10);
-  // 4
-  rect(insideCanvas.x + insideCanvas.width / 14 * 11.2, insideCanvas.y + insideCanvas.height / 4, insideCanvas.width / 40, insideCanvas.height / 10);
-  // 5
-  rect(insideCanvas.x + insideCanvas.width / 14 * 6.2, insideCanvas.y + insideCanvas.height / 1.25, insideCanvas.width / 35, insideCanvas.height / 10);
-}
-
-// Big rectangles in rose red
-function drawBigRoseRectangles() {
-  fill(roseRed);
-  noStroke();
-
-  // 1
-  rect(insideCanvas.x + insideCanvas.width / 11 * 1.2, insideCanvas.y + insideCanvas.height / 6, insideCanvas.width / 25, insideCanvas.height / 12);
-  // 2
-  rect(insideCanvas.x + insideCanvas.width / 11 * 2.4, insideCanvas.y + insideCanvas.height / 10, insideCanvas.width / 15, insideCanvas.height / 10);
-  // 3
-  rect(insideCanvas.x + insideCanvas.width / 11 * 5.72, insideCanvas.y + insideCanvas.height / 8.5, insideCanvas.width / 40, insideCanvas.height / 10);
-  // 4
-  rect(insideCanvas.x + insideCanvas.width / 18 * 17, insideCanvas.y + insideCanvas.height / 8, insideCanvas.width / 35, insideCanvas.height / 10);
-  // 5
-  rect(insideCanvas.x + insideCanvas.width / 11 * 7.04, insideCanvas.y + insideCanvas.height / 3.35, insideCanvas.width / 35, insideCanvas.height / 10);
-  // 6
-  rect(insideCanvas.x + insideCanvas.width / 11 * 1.97, insideCanvas.y + insideCanvas.height / 10 * 4.5, insideCanvas.width / 10.6, insideCanvas.height / 8);
-  // 7
-  rect(insideCanvas.x + insideCanvas.width / 10, insideCanvas.y + insideCanvas.height / 10 * 8, insideCanvas.width / 16.7, insideCanvas.height / 10);
-  // 8
-  rect(insideCanvas.x + insideCanvas.width / 10 * 4.73, insideCanvas.y + insideCanvas.height / 1.25, insideCanvas.width / 25, insideCanvas.height / 10);
-}
-
-// Big rectangles in line purple
-function drawLinePurpleRectangles() {
-  fill(linePurple);
-  noStroke();
-
-  // 1
-  rect(insideCanvas.x + insideCanvas.width / 10, insideCanvas.y + insideCanvas.height / 7 * 3.3, insideCanvas.width / 17.5, insideCanvas.height / 12);
-  // 2
-  rect(insideCanvas.x + insideCanvas.width / 8.5, insideCanvas.y + insideCanvas.height / 1.6, insideCanvas.width / 40, insideCanvas.height / 13.3);
-  // 3
-  rect(insideCanvas.x + insideCanvas.width / 5, insideCanvas.y + insideCanvas.height / 1.335, insideCanvas.width / 20, insideCanvas.height / 6.6);
-  // 4
-  rect(insideCanvas.x + insideCanvas.width / 3.4, insideCanvas.y + insideCanvas.height / 1.6, insideCanvas.width / 20, insideCanvas.height / 14);
-  // 5
-  rect(insideCanvas.x + insideCanvas.width / 1.25, insideCanvas.y + insideCanvas.height / 1.54, insideCanvas.width / 25, insideCanvas.height / 8);
-  // 6
-  rect(insideCanvas.x + insideCanvas.width / 1.285, insideCanvas.y + insideCanvas.height / 4, insideCanvas.width / 16, insideCanvas.height / 10);
-}
-
-// Big rectangles in milk yellow
-function drawMilkYellowRectangles() {
-  fill(milkYellow);
-  noStroke();
-
-  // 1
-  rect(insideCanvas.x + insideCanvas.width / 11 * 3, insideCanvas.y + insideCanvas.height / 8 * 2.4, insideCanvas.width / 15, insideCanvas.height / 12);
-  // 2
-  rect(insideCanvas.x + insideCanvas.width / 11 * 3, insideCanvas.y + insideCanvas.height / 8 * 4.3, insideCanvas.width / 15, insideCanvas.height / 28);
-}
-
-// Get the position of rectangles that have a circle in the centre
-function getRectangles() {
+// Draw featured rectangles
+// Record the position of each rectangles
+function featuredRectanglesDataArray() {
   return [
-    { x: insideCanvas.x, y: insideCanvas.y + insideCanvas.height / 3, width: insideCanvas.width / 12.5, height: insideCanvas.height / 6, color: linePurple },
-    { x: insideCanvas.x + insideCanvas.width / 11 * 3, y: insideCanvas.y + insideCanvas.height / 8 * 3, width: insideCanvas.width / 15, height: insideCanvas.height / 6, color: roseRed },
-    { x: insideCanvas.x + insideCanvas.width / 14 * 11.2, y: insideCanvas.y + insideCanvas.height / 4, width: insideCanvas.width / 40, height: insideCanvas.height / 10, color: roseRed },
-    { x: insideCanvas.x + insideCanvas.width / 11 * 2.4, y: insideCanvas.y + insideCanvas.height / 10, width: insideCanvas.width / 15, height: insideCanvas.height / 10, color: linePurple },
-    { x: insideCanvas.x + insideCanvas.width / 11 * 1.97, y: insideCanvas.y + insideCanvas.height / 10 * 4.5, width: insideCanvas.width / 10.6, height: insideCanvas.height / 8, color: limeGreen },
-    { x: insideCanvas.x + insideCanvas.width / 10 * 4.73, y: insideCanvas.y + insideCanvas.height / 1.25, width: insideCanvas.width / 25, height: insideCanvas.height / 10, color: limeGreen },
-    { x: insideCanvas.x + insideCanvas.width / 8.5, y: insideCanvas.y + insideCanvas.height / 1.6, width: insideCanvas.width / 40, height: insideCanvas.height / 13.3, color: roseRed },
-    { x: insideCanvas.x + insideCanvas.width / 5, y: insideCanvas.y + insideCanvas.height / 1.335, width: insideCanvas.width / 20, height: insideCanvas.height / 6.6, color: milkYellow },
-    { x: insideCanvas.x + insideCanvas.width / 3.4, y: insideCanvas.y + insideCanvas.height / 1.6, width: insideCanvas.width / 20, height: insideCanvas.height / 14, color: roseRed },
-    { x: insideCanvas.x + insideCanvas.width / 1.25, y: insideCanvas.y + insideCanvas.height / 1.54, width: insideCanvas.width / 25, height: insideCanvas.height / 8, color: roseRed }
+  // Lime Green Rectangles
+  { x: 0, y: 1 / 3, w: 1 / 12.5, h: 1 / 6, color: limeGreen },
+  { x: 3 / 11, y: 3 / 8, w: 1 / 15, h: 1 / 6, color: limeGreen },
+  { x: 6.44 / 14, y: 1 / 6.7, w: 1 / 25, h: 1 / 10, color: limeGreen },
+  { x: 11.2 / 14, y: 1 / 4, w: 1 / 40, h: 1 / 10, color: limeGreen },
+  { x: 6.2 / 14, y: 1 / 1.25, w: 1 / 35, h: 1 / 10, color: limeGreen },
+
+  // Rose Red Rectangles
+  { x: 1.2 / 11, y: 1 / 6, w: 1 / 25, h: 1 / 12, color: roseRed },
+  { x: 2.4 / 11, y: 1 / 10, w: 1 / 15, h: 1 / 10, color: roseRed },
+  { x: 5.72 / 11, y: 1 / 8.5, w: 1 / 40, h: 1 / 10, color: roseRed },
+  { x: 17 / 18, y: 1 / 8, w: 1 / 35, h: 1 / 10, color: roseRed },
+  { x: 7.04 / 11, y: 1 / 3.35, w: 1 / 35, h: 1 / 10, color: roseRed },
+  { x: 1.97 / 11, y: 4.5 / 10, w: 1 / 10.6, h: 1 / 8, color: roseRed },
+  { x: 1 / 10, y: 8 / 10, w: 1 / 16.7, h: 1 / 10, color: roseRed },
+  { x: 4.73 / 10, y: 1 / 1.25, w: 1 / 25, h: 1 / 10, color: roseRed },
+
+  // Line Purple Rectangles
+  { x: 1 / 10, y: 3.3 / 7, w: 1 / 17.5, h: 1 / 12, color: linePurple },
+  { x: 1 / 8.5, y: 1 / 1.6, w: 1 / 40, h: 1 / 13.3, color: linePurple },
+  { x: 1 / 5, y: 1 / 1.335, w: 1 / 20, h: 1 / 6.6, color: linePurple },
+  { x: 1 / 3.4, y: 1 / 1.6, w: 1 / 20, h: 1 / 14, color: linePurple },
+  { x: 1 / 1.25, y: 1 / 1.54, w: 1 / 25, h: 1 / 8, color: linePurple },
+  { x: 1 / 1.285, y: 1 / 4, w: 1 / 16, h: 1 / 10, color: linePurple },
+
+  // Milk Yellow Rectangles
+  { x: 3 / 11, y: 2.4 / 8, w: 1 / 15, h: 1 / 12, color: milkYellow },
+  { x: 3 / 11, y: 4.3 / 8, w: 1 / 15, h: 1 / 28, color: milkYellow },
   ];
 }
 
-function drawCenteredCircles() {
-  // Define all the rectangles that have a center circle
-  let rectangles = getRectangles();
+function generateFeaturedRectangles() {
+  let dataArray = featuredRectanglesDataArray();
+  for (let i = 0; i < dataArray.length; i++) {
+    let data = dataArray[i];
+    let rect = new FeatureRectangles(data.x, data.y, data.w, data.h, data.color);
+    featuredRectArray.push(rect);
+  }
+}
 
-  // Draw circles
-  for (let rect of rectangles) {
-    // calculate the center x and y pos of the rect
-    let centerX = rect.x + rect.width / 2;
-    let centerY = rect.y + rect.height / 2;
+function drawFeaturedRectangles() {
+  for (let i = 0; i < featuredRectArray.length; i++) {
+    let rect = featuredRectArray[i];
+    rect.updateSize(insideCanvas.width, insideCanvas.height);
+    rect.display();
+  }
+}
 
-    // define the diameter of the circle
-    let circleDiameter = min(rect.width, rect.height) / 2;
+// Draw circles inside of specific rectangles
+function getFeaturedRectPos() {
+  return [
+    // In the lime green rects
+    // Green 1
+    { x: 0, y: 1 / 3, w: 1 / 12.5, h: 1 / 6, color: linePurple },
+    // Green 2
+    { x: 3 / 11, y: 3 / 8, w: 1 / 15, h: 1 / 6, color: linePurple },
+    // In the rose red rects
+    // Red 2
+    { x: 2.4 / 11, y: 1 / 10, w: 1 / 15, h: 1 / 10, color: milkYellow },
+    // Red 6
+    { x: 1.97 / 11, y: 4.5 / 10, w: 1 / 10.6, h: 1 / 8, color: limeGreen },
+    // Red 8
+    { x: 4.73 / 10, y: 1 / 1.25, w: 1 / 25, h: 1 / 10, color: limeGreen },
+    // In the purple rects
+    // P2
+    { x: 1 / 8.5, y: 1 / 1.6, w: 1 / 40, h: 1 / 13.3, color: roseRed },
+    // P3
+    { x: 1 / 5, y: 1 / 1.335, w: 1 / 20, h: 1 / 6.6, color: milkYellow },
+    // P4
+    { x: 1 / 3.4, y: 1 / 1.6, w: 1 / 20, h: 1 / 14, color: roseRed },
+    // P5
+    { x: 1 / 1.25, y: 1 / 1.54, w: 1 / 25, h: 1 / 8, color: roseRed },
+  ];
+}
 
-    // draw circle
-    fill(rect.color);
-    noStroke();
-    ellipse(centerX, centerY, circleDiameter);
+function generateCentredCircle() {
+  let featuredRectPos = getFeaturedRectPos();
+  centredCircleArray = featuredRectPos.map(data => {
+      let radius = min(data.w, data.h); // Calculate radius based on the smallest dimension of the rectangle
+      return new circlesInRectangles(data.x + data.w / 2, data.y + data.h / 2, radius, data.color);
+  });
+  centredCircleArray.forEach(circle => circle.updateSize(insideCanvas.width, insideCanvas.height));
+}
+
+function drawCentredCircle() {
+  for (let i = 0; i < centredCircleArray.length; i++) {
+    let circle = centredCircleArray[i];
+    circle.updateSize(insideCanvas.width, insideCanvas.height);
+    circle.display();
   }
 }
